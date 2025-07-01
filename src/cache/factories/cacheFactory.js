@@ -3,11 +3,7 @@ const LRU = require('../policies/LruEvictionPolicy');
 const HashMapBasedStorage = require('../storage/hashMapBasedStorage');
 
 class CacheFactory {
-    constructor() {
-        this.cache = null;
-    }
-
-    createCache(evictionPolicy, storage, capacity) {
+    static createCache(evictionPolicy, storage, capacity) { // Fix: static method
         if (!evictionPolicy || !storage || !capacity) {
             throw new Error("Eviction policy and storage must be provided");
         }
@@ -23,9 +19,7 @@ class CacheFactory {
         } else {
           throw new Error("Unsupported eviction policy");
         }
-        this.cache = new Cache(EvictionPolicy, Storage);
-
-        return this.cache;
+        return new Cache(EvictionPolicy, Storage);
     }
 }
 

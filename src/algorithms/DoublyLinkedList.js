@@ -10,49 +10,46 @@ class DoublyLinkedList {
   }
 
   detachNode(node) {
-        if (node != null) {
-            node.prev.next = node.next;
-            node.next.prev = node.prev;
-        }
+    if (node != null) {
+      node.prev.next = node.next;
+      node.next.prev = node.prev;
     }
+  }
 
-    addNodeAtLast(node) {
-        const tailPrev = this.tail.prev;
-        tailPrev.next = node;
-        node.next = this.tail;
-        this.tail.prev = node;
-        node.prev = tailPrev;
+  addNodeAtLast(node) {
+    const tailPrev = this.tail.prev;
+    tailPrev.next = node;
+    node.next = this.tail;
+    this.tail.prev = node;
+    node.prev = tailPrev;
+  }
+
+  addElementAtLast(element) {
+    if (element === null || element === undefined) { // Fix: allow falsy values except null/undefined
+      throw new Error("Element cannot be null or undefined");
     }
+    const newNode = new DoublyLinkedNode(element);
+    this.addNodeAtLast(newNode);
+    return newNode;
+  }
 
-    addElementAtLast(element) {
-        if (!element) {
-            throw new Error("Element cannot be null");
-        }
-        const newNode = new DoublyLinkedNode(element);
-        this.addNodeAtLast(newNode);
-        return newNode;
+  isItemPresent() {
+    return this.head.next !== this.tail; // Fix: check if list is empty
+  }
+
+  getFirstNode() {
+    if (!this.isItemPresent()) {
+      return null;
     }
+    return this.head.next;
+  }
 
-    isItemPresent() {
-        return this.head != this.tail;
+  getLastNode() {
+    if (!this.isItemPresent()) {
+      return null;
     }
-
-    getFirstNode() {
-        if (!this.isItemPresent()) {
-            return null;
-        }
-        return this.head.next;
-    }
-
-    getLastNode() {
-        if (!this.isItemPresent()) {
-            return null;
-        }
-        return this.tail.prev;
-    }
-
-
-
+    return this.tail.prev;
+  }
 }
 
 module.exports = DoublyLinkedList;
