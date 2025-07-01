@@ -24,7 +24,6 @@ class HashMapBasedStorage extends Storage {
   }
 
   #isStorageFull() {
-    console.log(`Storage size: ${this.storage.size}, Capacity: ${this.capacity}`);
     return this.storage.size === this.capacity;
   }
 }
